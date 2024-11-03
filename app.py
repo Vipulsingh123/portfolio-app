@@ -1,7 +1,6 @@
 import streamlit as st
 import time
 import threading
-import mysql.connector
 
 st.set_page_config(page_title="Vipul Singh Portfolio", page_icon="🧊")
 st.markdown("""
@@ -22,7 +21,7 @@ col1.header("An Aspiring Analyst")
 col2.image('vipulimage.jpg', width=200)
 
 st.subheader("About Me", divider=True)
-st.markdown("I am a highly motivated and analytical professional with a Bachelor's of Technology from the Modern Institute of Tecnology & Research Center, specializing in Artificial Intelligence and Data Science, With a strong foundation in SQL, MySQL Server, Database Admin, Excel, Python, Power bi, I possess a passion for extracting insights from data. My handa-on experience includes analyzing dataset, developing end-to-end data analysis report dashboard, and creating educational content to simplify complex analytical concepts.")
+st.markdown("I am a highly motivated and analytical professional with a Bachelor's of Technology from the Modern Institute of Technology & Research Center, specializing in Artificial Intelligence and Data Science. With a strong foundation in SQL, MySQL Server, Database Admin, Excel, Python, Power BI, I possess a passion for extracting insights from data. My hands-on experience includes analyzing datasets, developing end-to-end data analysis report dashboards, and creating educational content to simplify complex analytical concepts.")
 
 st.subheader("Resume", divider=True)
 
@@ -34,11 +33,11 @@ with col1:
     st.text("Tools :")
     st.text("Other Skills :")
 with col2:
-    st.text("Data Science & Analytics") 
+    st.text("Data Science & Analytics")
     st.text("Analysis, Dashboards & Trend Forecasting")
-    st.text("Bachelor of Engineering")  
-    st.text("Microsoft Power BI, Excel, MYSQL Server, Git, Jupyter")
-    st.text("Vscode, Machine Learning, Python, C")
+    st.text("Bachelor of Engineering")
+    st.text("Microsoft Power BI, Excel, MySQL Server, Git, Jupyter")
+    st.text("VSCode, Machine Learning, Python, C")
 
 st.subheader("Connect with me On", divider=True)
 col1, col2, col3 = st.columns([0.4, 0.4, 0.4])
@@ -59,7 +58,7 @@ st.sidebar.progress(80, text="SQL 80%")
 st.sidebar.progress(75, text="Python 75%")
 st.sidebar.progress(80, text="Data Visualization 80%")
 st.sidebar.progress(85, text="Excel & Spreadsheet 85%")
-st.sidebar.progress(80, text="Stastical Analysis 75%")
+st.sidebar.progress(80, text="Statistical Analysis 75%")
 
 col1, col2 = st.columns([3, 4])
 with col1:
@@ -98,16 +97,7 @@ with st.form(key='my_form'):
     submit_button = st.form_submit_button("Submit")
     if submit_button:
         if name and email and mob_no:
-            mydb = mysql.connector.connect(
-                host="localhost",
-                user="root",
-                password="wc58uyes",
-                database="details"
-            )
-            cursor = mydb.cursor()
-            cursor.execute("INSERT INTO INFO (Full_name, Email, Mobile_no) VALUES (%s, %s, %s)", (name, email, mob_no))
-            mydb.commit()
-            cursor.close()
+            # Add your desired form submission handling code here
             st.success("Submitted successfully!")
         else:
             st.error("Please fill in all fields.")
