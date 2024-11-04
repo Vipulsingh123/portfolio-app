@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 import threading
+import mysql.connector
 
 # Set page config
 def set_page_config():
@@ -88,6 +89,16 @@ def display_contact_form():
         submit_button = st.form_submit_button("Submit")
         if submit_button:
             if name and email and mob_no:
+                mydb = mysql.connector.connect(
+                    host="localhost",
+                    user="root",
+                    password="wc58uyes",
+                    database="details"
+                )
+                cursor = mydb.cursor()
+                cursor.execute("INSERT INTO INFO (Full_name, Email, Mobile_no) VALUES (%s, %s, %s)", (name, email, mob_no))
+                mydb.commit()
+                cursor.close()
                 st.success("Submitted successfully!")
             else:
                 st.error("Please fill in all fields.")
@@ -105,9 +116,10 @@ def display_main_content():
         st.text("1 Month")
         st.image('vipulimage.jpg')
 
-    st.container().write("This will show first")
-    st.container().write("This will show second")
+    c = st.container()
     st.write("This will show last")
+    c.write("This will show first")
+    c.write("This will show second")
 
 # Display tabs
 def display_tabs():
