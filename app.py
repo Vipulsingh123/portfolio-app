@@ -1,11 +1,9 @@
 import streamlit as st
-import time
-import threading
-import mysql.connector
+# import mysql.connector
 
 # Set page config
 def set_page_config():
-    st.set_page_config(page_title="Vipul Singh Portfolio", page_icon="🧊")
+    st.set_page_config(page_title="Vipul Singh Portfolio", page_icon="🧊", layout='wide')
 
 # Add custom CSS styles
 def add_custom_styles():
@@ -15,6 +13,21 @@ def add_custom_styles():
         .stButton>button {
             background-color: #FFD700 !important; /* Yellow color */
             color: black !important;
+        }
+        .stHeader {
+            background-color: #f0f2f6;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .stSidebar {
+            background-color: #f8f9fa;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        .stColumn {
+            padding: 1em;
         }
         </style>
         """,
@@ -28,9 +41,13 @@ def display_welcome_message():
 # Display header and image
 def display_header_and_image():
     col1, col2 = st.columns([1, 1])
-    col1.title("I am :blue[Vipul Singh]")
-    col1.header("An Aspiring Analyst")
-    col2.image('vipulimage.jpg', width=200)
+    with col1:
+        st.markdown("<div class='stHeader'>", unsafe_allow_html=True)
+        st.title("I am :blue[Vipul Singh]")
+        st.header("An Aspiring Analyst")
+        st.markdown("</div>", unsafe_allow_html=True)
+    with col2:
+        st.image('vipulimage.jpg', width=200)
 
 # Display about me section
 def display_about_me():
@@ -60,9 +77,9 @@ def display_resume():
 def display_connect():
     st.subheader("Connect with me On", divider=True)
     col1, col2, col3 = st.columns([0.4, 0.4, 0.4])
-    col1.link_button("LinkedIn", "https://vipulsingh.com")
-    col2.link_button("GitHub", url='https://github.com', icon="🛜")
-    col3.link_button("Resume", url='https://example.com/resume')
+    col1.button("LinkedIn", "https://vipulsingh.com")
+    col2.button("GitHub", url='https://github.com')
+    col3.button("Resume", url='https://example.com/resume')
 
 # Display sidebar
 def display_sidebar():
@@ -81,7 +98,7 @@ def display_sidebar():
 
 # Display contact form
 def display_contact_form():
-    st.subheader("How can I Contact You")
+    st.subheader("Contact Me")
     with st.form(key='contact_form'):
         name = st.text_input("Name", placeholder="ABC DEF")
         email = st.text_input("Email", placeholder="simba@email.com")
@@ -89,16 +106,16 @@ def display_contact_form():
         submit_button = st.form_submit_button("Submit")
         if submit_button:
             if name and email and mob_no:
-                mydb = mysql.connector.connect(
-                    host="localhost",
-                    user="root",
-                    password="wc58uyes",
-                    database="details"
-                )
-                cursor = mydb.cursor()
-                cursor.execute("INSERT INTO INFO (Full_name, Email, Mobile_no) VALUES (%s, %s, %s)", (name, email, mob_no))
-                mydb.commit()
-                cursor.close()
+                # mydb = mysql.connector.connect(
+                #     host="localhost",
+                #     user="root",
+                #     password="wc58uyes",
+                #     database="details"
+                # )
+                # cursor = mydb.cursor()
+                # cursor.execute("INSERT INTO INFO (Full_name, Email, Mobile_no) VALUES (%s, %s, %s)", (name, email, mob_no))
+                # mydb.commit()
+                # cursor.close()
                 st.success("Submitted successfully!")
             else:
                 st.error("Please fill in all fields.")
@@ -124,7 +141,8 @@ def display_main_content():
 # Display tabs
 def display_tabs():
     tab1, tab2 = st.tabs(["EXCEL", "SQL"])
-    tab1.header("Below are the projects made using excel")
+    tab1.header("Below are the projects made using Excel")
+    tab2.header("Below are the projects made using SQL")
 
 # Main function to run the app
 def main():
