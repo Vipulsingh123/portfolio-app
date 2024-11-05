@@ -42,7 +42,7 @@ def display_header_and_image():
         st.header("Aspiring Data Analyst")
         st.markdown("</div>", unsafe_allow_html=True)
     with col2:
-        st.image('vipulimage.jpg')
+        st.image('vipulimage.jpg',width = 300)
 
 # Display about me section
 def display_about_me():
